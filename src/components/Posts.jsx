@@ -18,7 +18,7 @@ export default function Posts({ token }) {
 
   useEffect(() => {
     loadPosts(token);
-  }, [])
+  }, [token])
 
   return (
     isLoading ? <p>포스트 로딩중...</p> :
