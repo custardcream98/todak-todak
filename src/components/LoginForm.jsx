@@ -11,6 +11,7 @@ export default function LoginForm() {
     false || !!sessionStorage.getItem("accessToken")
   );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
 
   /**
    * 로그인 폼 제출시
@@ -37,7 +38,7 @@ export default function LoginForm() {
       }
 
     } catch (error) {
-      console.log(error.message);
+      console.log(error.code);
       if (error.code === "auth/wrong-password") {
         console.log("비번 틀림");
         setIsLoggingIn(false);
@@ -45,6 +46,7 @@ export default function LoginForm() {
       }
 
       if (error.code === "auth/user-not-found") {
+        setIsCreatingUser(true);
         try {
           const createdUser = await createUserWithEmailAndPassword(firebaseAuth, email, password);
 
@@ -53,11 +55,13 @@ export default function LoginForm() {
             sessionStorage.setItem("accessToken", idToken);
             setAuthorizedUser(true);
           }
+          setIsCreatingUser(false);
         } catch (error) {
           if (error.code === "auth/email-already-in-use") {
             console.log("이미 사용중인 이메일");
           }
           setIsLoggingIn(false);
+          setIsCreatingUser(false);
           return;
         }
       }
@@ -80,7 +84,7 @@ export default function LoginForm() {
     </>
   ) : (
     isLoggingIn ?
-      <p>로그인중...</p>
+      <p>{isCreatingUser ? "유저 생성중..." : "로그인중..."}</p>
       :
       <form onSubmit={onSubmit}>
         <input ref={emailRef} type="email" name="email" required />
