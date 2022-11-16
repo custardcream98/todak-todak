@@ -57,9 +57,9 @@ export default function LoginForm() {
           }
           setIsCreatingUser(false);
         } catch (error) {
-          if (error.code === "auth/email-already-in-use") {
+          if (error.code === "auth/email-already-in-use")
             console.log("이미 사용중인 이메일");
-          }
+
           setIsLoggingIn(false);
           setIsCreatingUser(false);
           return;

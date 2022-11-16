@@ -7,7 +7,7 @@ const firebaseConfig = {
   projectId: "todak-todak",
   storageBucket: "todak-todak.appspot.com",
   messagingSenderId: "925816719269",
-  appId: "1:925816719269:web:8fe0c6677e358830caca4c",
+  appId: "1:925816719269:web:8fe0c6677e358830caca4c"
 };
 
 const app = initializeApp(firebaseConfig);

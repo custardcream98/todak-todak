@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import fetchPosts from '../api/fetchPosts';
+import React, { useEffect, useState } from "react";
+import fetchPosts from "../api/fetchPosts";
 
 export default function Posts({ token }) {
   const [postData, setPostData] = useState([]);
@@ -9,22 +9,21 @@ export default function Posts({ token }) {
     setIsLoading(true);
     const posts = await fetchPosts(token);
 
-    if (!!posts) {
+    if (posts)
       setPostData(posts);
-    }
 
     setIsLoading(false);
-  }
+  };
 
   useEffect(() => {
     loadPosts(token);
-  }, [token])
+  }, [token]);
 
   return (
     isLoading ? <p>포스트 로딩중...</p> :
       <>
         {React.Children.toArray(postData.map((post) =>
-          <section className='post'>
+          <section className="post">
             <strong>{post.title}</strong>
             <p>{new Date(post.createdAt).toLocaleDateString()}</p>
             <ul>
@@ -39,5 +38,5 @@ export default function Posts({ token }) {
           </section>
         ))}
       </>
-  )
+  );
 }
