@@ -1,5 +1,5 @@
 import { browserSessionPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { firebaseAuth } from "../config/firebase-config";
 import Posts from "./Posts";
 
